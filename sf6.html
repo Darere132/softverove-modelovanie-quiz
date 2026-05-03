@@ -44,9 +44,13 @@ const questions = [
 {q:"14. Rozšírené regióny (expansion regions) používame ak:", options:["Chceme vykonať rovnaké aktivity postupne pre všetky prvky kolekcie","Chceme spojiť databázové tabuľky","Chceme renderovať UI komponenty","Chceme zmazať všetky aktivity"], correct:[0], multi:true},
 {q:"15. Diagram aktivít môže mať:", options:["Jeden začiatok a tri konce","Jeden začiatok a jeden koniec","Viac začiatkov v jednom diagrame","Iba koncové stavy bez začiatku"], correct:[0,1], multi:true},
 {q:"16. Diagram aktivít patrí medzi:", options:["Diagramy správania","Štrukturálne diagramy","Databázové diagramy","Implementačné diagramy kódu"], correct:[0], multi:true},
-{q:"17. Diagram aktivít používame na:", options:["Znázornenie zodpovednosti prvkov systému za jednotlivé aktivity","Zobrazenie poradia aktivít počas vykonávania prípadu použitia","Návrh databázovej schémy","Návrh UI obrazoviek"], correct:[0,1], multi:true},
-{q:"18. Podmienka v aktivity diagrame:", options:["Musí byť výraz nadobúdajúci hodnoty true alebo false","Sa píše na prechody (čiary) medzi aktivitami v hranatých zátvorkách","Je vždy voliteľná a nepoužíva sa v UML","Sa zapisuje ako SQL výraz"], correct:[0,1], multi:true}
+{q:"Diagram aktivít používame na:", options:["Znázornenie zodpovednosti prvkov systému za jednotlivé aktivity","Zobrazenie poradia aktivít počas vykonávania prípadu použitia","Návrh databázovej schémy","Návrh UI obrazoviek"], correct:[0,1], multi:true},
+{q:"Podmienka v aktivity diagrame:", options:["Musí byť výraz nadobúdajúci hodnoty true alebo false","Sa píše na prechody (čiary) medzi aktivitami v hranatých zátvorkách","Je vždy voliteľná a nepoužíva sa v UML","Sa zapisuje ako SQL výraz"], correct:[0,1], multi:true}
 ];
+
+questions.forEach(q => {
+  q.q = q.q.replace(/^\d+\.\s*/, "");
+});
 
 function shuffle(a){return a.sort(()=>Math.random()-0.5);}
 
@@ -60,7 +64,7 @@ let opts=shuffle(q.options.map((o,idx)=>({o,idx}))).map(opt=>
 `<label><input type='${q.multi?"checkbox":"radio"}' name='q${i}' value='${opt.idx}'> ${opt.o}</label>`
 ).join("");
 
-div.innerHTML=`<p>${q.q}</p>`+opts;
+div.innerHTML=`<p><b>${i+1}.</b> ${q.q}</p>`+opts;
 div.dataset.correct=JSON.stringify(q.correct);
 c.appendChild(div);
 });

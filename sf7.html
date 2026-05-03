@@ -45,6 +45,10 @@ const questions = [
 {q:"15. Kľúčové slovo self odkazuje v OCL výraze na", options:["Kontextovú inštanciu v OCL","Inú náhodnú triedu","Externú databázu","Používateľské rozhranie"], correct:[0], multi:true}
 ];
 
+questions.forEach(q => {
+  q.q = q.q.replace(/^\d+\.\s*/, "");
+});
+
 function shuffle(a){return a.sort(()=>Math.random()-0.5);}
 
 function render(){
@@ -57,7 +61,7 @@ let opts=shuffle(q.options.map((o,idx)=>({o,idx}))).map(opt=>
 `<label><input type='${q.multi?"checkbox":"radio"}' name='q${i}' value='${opt.idx}'> ${opt.o}</label>`
 ).join("");
 
-div.innerHTML=`<p>${q.q}</p>`+opts;
+div.innerHTML=`<p><b>${i+1}.</b> ${q.q}</p>`+opts;
 div.dataset.correct=JSON.stringify(q.correct);
 c.appendChild(div);
 });

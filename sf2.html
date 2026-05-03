@@ -119,8 +119,11 @@ const questions = [
 {q:"44. Rozdiel abstraktná trieda vs rozhranie:", options:["ABS trieda môže mať atribúty a rozhranie nemôže","Abstraktná trieda môže mať implementáciu","Rozhranie definuje kontrakt","Rozhranie nemá stav"], correct:[0,1], multi:true},
 
 {q:"45. Konceptuálny model UML tvorí:", options:["Základné stavebné bloky","Pravidlá","Všeobecné mechanizmy","Model systému na vysokej úrovni"], correct:[0,1,2], multi:true}
-
 ];
+
+questions.forEach(q => {
+  q.q = q.q.replace(/^\d+\.\s*/, "");
+});
 
 function shuffle(a){return a.sort(()=>Math.random()-0.5);}
 
@@ -133,7 +136,7 @@ div.className="question";
 let opts=shuffle(q.options.map((o,idx)=>({o,idx}))).map((opt)=>{
 return `<label><input type='${q.multi?"checkbox":"radio"}' name='q${i}' value='${opt.idx}'> ${opt.o}</label>`;
 }).join("");
-div.innerHTML=`<p>${q.q}</p>`+opts;
+div.innerHTML=`<p><b>${i+1}.</b> ${q.q}</p>`+opts;
 div.dataset.correct=JSON.stringify(q.correct);
 c.appendChild(div);
 });

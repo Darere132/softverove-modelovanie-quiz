@@ -37,8 +37,11 @@ const questions = [
 {q:"7. DEPLOY závislosť popisuje vzťah medzi", options:["uzlom a artefaktom","triedou a jej metódou","use case a scenárom","stavom a prechodom"], correct:[0], multi:true},
 {q:"8. Tenký klient slúži na", options:["zobrazenie informácií","vykonávanie všetkých výpočtov servera","správu databázových transakcií","kompiláciu zdrojového kódu"], correct:[0], multi:true},
 {q:"9. Interaction overview diagram môže obsahovať", options:["sekvenčný diagram","class diagram","use case diagram","deployment diagram"], correct:[0], multi:true}
-
 ];
+
+questions.forEach(q => {
+  q.q = q.q.replace(/^\d+\.\s*/, "");
+});
 
 function shuffle(a){return a.sort(()=>Math.random()-0.5);}
 
@@ -52,7 +55,7 @@ let opts=shuffle(q.options.map((o,idx)=>({o,idx}))).map(opt=>
 `<label><input type='${q.multi?"checkbox":"radio"}' name='q${i}' value='${opt.idx}'> ${opt.o}</label>`
 ).join("");
 
-div.innerHTML=`<p>${q.q}</p>`+opts;
+div.innerHTML=`<p><b>${i+1}.</b> ${q.q}</p>`+opts;
 div.dataset.correct=JSON.stringify(q.correct);
 c.appendChild(div);
 });

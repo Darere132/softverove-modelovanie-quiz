@@ -70,6 +70,10 @@ const questions = [
 {q:"40. Vzťah generalizácia môžeme použiť v", options:["Diagrame prípadov použitia","Len v class diagrame","Len v state diagrame","Len v OCL výrazoch"], correct:[0], multi:true}
 ];
 
+questions.forEach(q => {
+  q.q = q.q.replace(/^\d+\.\s*/, "");
+});
+
 function shuffle(a){return a.sort(()=>Math.random()-0.5);}
 
 function render(){
@@ -82,7 +86,7 @@ let opts=shuffle(q.options.map((o,idx)=>({o,idx}))).map(opt=>
 `<label><input type='${q.multi?"checkbox":"radio"}' name='q${i}' value='${opt.idx}'> ${opt.o}</label>`
 ).join("");
 
-div.innerHTML=`<p>${q.q}</p>`+opts;
+div.innerHTML=`<p><b>${i+1}.</b> ${q.q}</p>`+opts;
 div.dataset.correct=JSON.stringify(q.correct);
 c.appendChild(div);
 });
