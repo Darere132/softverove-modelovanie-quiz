@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<title>UML Quiz 3</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 20px; }
+.question { padding: 12px; margin-bottom: 12px; border: 1px solid #ddd; border-radius: 8px; }
+.correct { background:#d4edda; }
+.wrong { background:#f8d7da; }
+label { display:block; margin:4px 0; }
+button { padding:10px 18px; font-size:16px; cursor:pointer; }
+#result { margin-top:20px; font-size:18px; font-weight:bold; }
+</style>
+</head>
+<body>
+
+<h2>UML Quiz 3 – Use Case Diagramy</h2>
+
+<div id="quiz"></div>
+<button onclick="checkAnswers()">Vyhodnotiť</button>
+<div id="result"></div>
+
+<script>
+const questions = [
+{q:"1. Scenár by mal obsahovať", options:["Meno scenára","Sekvenciu chovania","A priori podmienky","Náhodný kód"], correct:[0,1,2], multi:true},
+{q:"2. Chyby pri tvorbe UC modelu", options:["Implementačne závislý model","Chýbajú zlaté UC","Príliš veľa aktorov","Použitie UML"], correct:[0,1], multi:true},
+{q:"3. Akcie v sekvencii chovania", options:["činnosti systému","databázové tabuľky","diagramy","aktéri"], correct:[0], multi:false},
+{q:"4. Aký je vzťah medzi prípadmi použitia a črtami (príbehmi) v XP (extrémnom programovaní): ", options:["Prípady použitia môžu byť východiskom pre črty","črty v XP sú jemnejšie (podrobnejšie) ako prípady použitia","UC sú implementácie","črty sú UML diagramy"], correct:[0,1], multi:true},
+{q:"5. Medzi dvoma prípadmi použitia nepoužívame vzťah: ", options:["Asociácie","Include","Extend","Generalizáciu"], correct:[0], multi:true},
+{q:"6. Cieľ UC modelovania", options:["Zvýšiť úspešnosť","Zapojenie používateľa do počiatočnej analýzy problému","Znížiť počet tried","Generovanie kódu"], correct:[0,1], multi:true},
+{q:"7. Vzťahy medzi aktormi", options:["Generalizácia","Include","Extend","Dependency"], correct:[0], multi:false},
+{q:"8. Biznis UC", options:["Prípad použitia popisujúci ako to funguje v realite","UI návrh","Kód","Databáza"], correct:[0], multi:false},
+{q:"9. Cieľ UC diagramu", options:["Úplnosť modelu","Nájsť všetky prípady použitia","Implementácia","Testovanie"], correct:[0,1], multi:true},
+{q:"10. Scenár obsahuje", options:["Sekvenciu správania","Triedy","Atribúty","UI"], correct:[0], multi:false},
+{q:"11. Vzťah zahŕňania prípadov použitia (include) je vzťahom medzi základným a zahŕňaným prípadom použitia, pri ktorom:", options:["Base include included","Šípka na included","Šípka na base","Bez smeru"], correct:[0,1], multi:true},
+{q:"12. Čo spája sekvencie UC", options:["Cieľ","Trieda","Actor","DB"], correct:[0], multi:false},
+{q:"13. Jeden UC obsahuje", options:["Min. 1 sekvenciu","0 sekvencií","Len UI","Len aktora"], correct:[0], multi:false},
+{q:"14. UC diagram patrí medzi", options:["Behaviorálne diagramy","Štrukturálne","Databázové","Kódové"], correct:[0], multi:false},
+{q:"15. Vzťah rozširovania prípadov použitia je vzťahom medzi základným a rozšíreným prípadom použitia, pri ktorom: ", options:["Rozšírený prípad použitia zväčšuje, rozširuje základný prípad použitia","šípka smeruje smerom k základnému prípadu použitia","Šípka na extend","Bez vzťahu"], correct:[0,1], multi:true},
+{q:"16. Medzi jednotlivými prípadmi použitia v diagrame prípadov použitia môžu byť vzťahy:", options:["Extend","Include","Generalizácia","Kompilácia"], correct:[0,1,2], multi:true},
+{q:"17. Pri vývoji jednotlivých prípadov použitia: ", options:["Najprv vyvíjame zahŕňané prípady použitia","Najprv vyvíjam tie, ku ktorým smeruje šípka vo vzťahu","Náhodne","UI prvky"], correct:[0,1], multi:true},
+{q:"18. UC body rozšírenia", options:["Nemusí mať","Môže mať 3","Musí mať 0","Len 1"], correct:[0,1], multi:true},
+{q:"19. Aktor", options:["Môže byť aj iný externý systém","Je voči vyvíjanému systému externý prvok","Metóda","DB"], correct:[0,1], multi:true},
+{q:"20. Medzi aktormi a jednotlivými prípadmi použitia v diagrame prípadov použitia môže byť vzťah", options:["Asociácia","Include","Extend","Dependency"], correct:[0], multi:false},
+{q:"21. Časová závislosť UC", options:["Chyba","Správne","Nutná","Diagram"], correct:[0], multi:false},
+{q:"22. Správny model", options:["Zlaté + obslužné UC","Len UI","Len DB","Len aktori"], correct:[0], multi:false},
+{q:"23. Koľko scenárov MUSÍ mať jeden prípad použitia", options:["Aspoň 1","0","10","Neobmedzené bez pravidiel"], correct:[0], multi:false},
+{q:"24. Časová závislosť v modeli", options:["Chybná","Správna","Nutná","UI prvok"], correct:[0], multi:false},
+{q:"25. Include znamená", options:["Vždy sa vykoná","Voliteľné","UI","DB"], correct:[0], multi:false},
+{q:"26. UC vzťahy môžu byť", options:["Generalizácia","Dependency","Kód","UI"], correct:[0,1], multi:true},
+{q:"27. Zlaté UC", options:["Prečo systém existuje","UI prvky","DB tabuľky","Testy"], correct:[0], multi:false},
+{q:"28. Body rozšírenia slúžia pre", options:["Extend vzťah","Include","Actor","DB"], correct:[0], multi:false}
+];
+
+function shuffle(a){return a.sort(()=>Math.random()-0.5);}
+
+function render(){
+const c=document.getElementById("quiz");
+c.innerHTML="";
+shuffle(questions).forEach((q,i)=>{
+let div=document.createElement("div");
+div.className="question";
+let opts=shuffle(q.options.map((o,idx)=>({o,idx}))).map((opt)=>{
+return `<label><input type='${q.multi?"checkbox":"radio"}' name='q${i}' value='${opt.idx}'> ${opt.o}</label>`;
+}).join("");
+div.innerHTML=`<p>${q.q}</p>`+opts;
+div.dataset.correct=JSON.stringify(q.correct);
+c.appendChild(div);
+});
+}
+
+function checkAnswers(){
+let score=0;
+document.querySelectorAll(".question").forEach(div=>{
+let correct=JSON.parse(div.dataset.correct);
+let inputs=div.querySelectorAll("input");
+let selected=[];
+inputs.forEach(i=>{if(i.checked) selected.push(parseInt(i.value));});
+
+let ok=JSON.stringify(selected.sort())===JSON.stringify(correct.sort());
+
+div.classList.remove("correct","wrong");
+
+if(ok){score++; div.classList.add("correct");}
+else{
+div.classList.add("wrong");
+inputs.forEach(i=>{
+if(correct.includes(parseInt(i.value))){i.parentElement.style.background="#d4edda";}
+});
+}
+});
+
+document.getElementById("result").innerText=`Výsledok: ${score} / 28`;
+}
+
+render();
+</script>
+
+</body>
+</html>

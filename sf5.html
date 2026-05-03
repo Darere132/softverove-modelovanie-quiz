@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<title>UML Quiz 5 - Interakcie</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 20px; }
+.question { padding: 12px; margin-bottom: 12px; border: 1px solid #ddd; border-radius: 8px; }
+.correct { background:#d4edda; }
+.wrong { background:#f8d7da; }
+label { display:block; margin:4px 0; }
+button { padding:10px 18px; font-size:16px; cursor:pointer; }
+#result { margin-top:20px; font-size:18px; font-weight:bold; }
+</style>
+</head>
+<body>
+
+<h2>UML Quiz 5 – Modelovanie interakcií</h2>
+
+<div id="quiz"></div>
+<button onclick="checkAnswers()">Vyhodnotiť</button>
+<div id="result"></div>
+
+<script>
+const questions = [
+{q:"1. Vzťah medzi interakciou a prípadom použitia môže byť:", options:["Interakcia je realizáciou prípadu použitia","Use case je realizáciou interakcie","Interakcia je databáza","Interakcia je trieda"], correct:[0], multi:false},
+
+{q:"2. Pre znázornenie interakcií medzi dvoma prvkami interakcie použijeme diagram:", options:["Sekvenčný diagram","Triedny diagram","ER diagram","Deployment diagram"], correct:[0], multi:false},
+
+{q:"3. CRC karty slúžia na:", options:["Znázornenie zodpovednosti a spolupráce prvkov","UI návrh","DB modelovanie","Kompiláciu"], correct:[0], multi:false},
+
+{q:"4. Znak * pred hranatými zátvorkami v komunikácii označuje:", options:["Opakovanie – iteráciu","Atribút","Metódu","Triedu"], correct:[0], multi:false},
+
+{q:"5. Komunikačný diagram:", options:["Dáva dôraz na zobrazenie štrukturálnych vzťahov medzi prvkami","Zobrazuje postupnosť správ medzi prvkami","Len UI","Len DB"], correct:[0,1], multi:true},
+
+{q:"6. Poradie komunikácií v sekvenčnom diagrame:", options:["Je reprezentované vertikálnou osou","Môžeme určiť aj inak","DB poradie","UI poradie"], correct:[0,1], multi:true},
+
+{q:"7. Reflexná komunikácia:", options:["Označuje správu poslanú od prvku k nemu samému","Externý call","DB query","UI event"], correct:[0], multi:false},
+
+{q:"8. Čiara života:", options:["Sa používa v sekvenčnom diagrame","Smeruje vertikálne od prvku dole","DB tabuľka","Trieda"], correct:[0,1], multi:true},
+
+{q:"9. Komunikácia (správa) v komunikačnom diagrame:", options:["Môže obsahovať tzv. dot notáciu","Môže obsahovať číslo označujúce jej poradie","Môže obsahovať iteráciu","Všetko"], correct:[0,1,2], multi:true},
+
+{q:"10. Rola v interakcii:", options:["Definuje použitie inštancie triedy v interakcii","DB schéma","UI komponent","Atribút"], correct:[0], multi:false},
+
+{q:"11. Komunikácia medzi prvkami v sekvenčnom diagrame:", options:["Je zobrazená ako plná čiara so šípkou","Môže obsahovať podmienku","DB join","UI flow"], correct:[0,1], multi:true},
+
+{q:"12. Označte správne tvrdenia:", options:["Interakcia je množina správ medzi prvkami","Spolupráca (collaboration) je kolekcia tried, ich správ a ich asociácií","UI layout","DB model"], correct:[0,1], multi:true},
+
+{q:"13. Iterácia sa v komunikácii (správe) označuje:", options:["Hviezdičkou a hranatými zátvorkami *[iterácia]","#loop","@repeat","!cycle"], correct:[0], multi:false},
+
+{q:"14. Poradie komunikácií v komunikačnom diagrame:", options:["Môžeme zistiť inak","Len časovo","Len náhodne","Nie je možné"], correct:[0], multi:false},
+
+{q:"15. Dot notácia:", options:["Slúži na zobrazenie rôznych úrovní komunikácie","UI štýl","DB index","Trieda"], correct:[0], multi:false},
+
+{q:"16. Sekvenčný diagram znázorňuje podobné informácie ako:", options:["Komunikačný diagram","Úplne odlišné","Len DB","Len UI"], correct:[0], multi:true},
+
+{q:"17. Sekvenčný diagram slúži na zobrazenie:", options:["Ako na seba vzájomne pôsobia prvky v čase","DB štruktúru","UI layout","Kód"], correct:[0], multi:false},
+
+{q:"18. Aktivácia:", options:["Reprezentuje časovú periódu, počas ktorej prvok vykonáva operáciu","Sa používa v sekvenčnom diagrame","DB transakcia","Trieda"], correct:[0,1], multi:true},
+
+{q:"19. Pri modelovaní interakcií sa posielajú správy:", options:["Aj synchrónne aj asynchrónne","Len sync","Len async","Žiadne"], correct:[0], multi:false},
+
+{q:"20. Operátory riadenia (control operators) slúžia na modelovanie:", options:["Cyklu","Možnosti výberu postupnosti správ","DB join","UI render"], correct:[0,1], multi:true},
+
+{q:"21. Rola triedy (class role) v interakcii:", options:["Definuje konkrétne použitie objektu triedy v interakcii","DB tabuľka","UI komponent","Atribút"], correct:[0], multi:false},
+
+{q:"22. V hranatých zátvorkách môže byť v sekvenčnom diagrame:", options:["Počet opakovaní – iterácia","Podmienka interakcie","UI","DB"], correct:[0,1], multi:true},
+
+{q:"23. Pre znázornenie vzťahov a interakcií medzi prvkami interakcie použijeme diagram:", options:["Komunikačný diagram","Class diagram","Use case","State diagram"], correct:[0], multi:false},
+
+{q:"24. Modelovanie interakcií je:", options:["Špeciálny prípad modelovania správania","Štrukturálne","DB model","UI model"], correct:[0], multi:false},
+
+{q:"25. CRC karty slúžia na:", options:["Hľadanie zodpovednosti danej triedy","Spoluprácu","UI","DB"], correct:[0,1], multi:true},
+
+{q:"26. Princíp CRC pri vytváraní balíčkov znamená, že do jedného balíčka dávame triedy ktoré:", options:["Sú spolu znovupoužiteľné","Náhodné","UI skupiny","DB tabuľky"], correct:[0], multi:false},
+
+{q:"27. Nahraditeľnosť sa:", options:["Môže realizovať pomocou dedičnosti","Kompozícia","UI","DB"], correct:[0], multi:false}
+];
+
+function shuffle(a){return a.sort(()=>Math.random()-0.5);}
+
+function render(){
+const c=document.getElementById("quiz");
+c.innerHTML="";
+shuffle(questions).forEach((q,i)=>{
+let div=document.createElement("div");
+div.className="question";
+let opts=shuffle(q.options.map((o,idx)=>({o,idx}))).map(opt=>
+`<label><input type='${q.multi?"checkbox":"radio"}' name='q${i}' value='${opt.idx}'> ${opt.o}</label>`
+).join("");
+
+div.innerHTML=`<p>${q.q}</p>`+opts;
+div.dataset.correct=JSON.stringify(q.correct);
+c.appendChild(div);
+});
+}
+
+function checkAnswers(){
+let score=0;
+document.querySelectorAll(".question").forEach(div=>{
+let correct=JSON.parse(div.dataset.correct);
+let inputs=div.querySelectorAll("input");
+let selected=[];
+inputs.forEach(i=>{if(i.checked) selected.push(parseInt(i.value));});
+
+let ok=JSON.stringify(selected.sort())===JSON.stringify(correct.sort());
+
+div.classList.remove("correct","wrong");
+
+if(ok){score++; div.classList.add("correct");}
+else{
+div.classList.add("wrong");
+inputs.forEach(i=>{
+if(correct.includes(parseInt(i.value))){i.parentElement.style.background="#d4edda";}
+});
+}
+});
+
+document.getElementById("result").innerText=`Výsledok: ${score} / 27`;
+}
+
+render();
+</script>
+
+</body>
+</html>

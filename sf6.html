@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<title>UML Quiz 6 - Diagram aktivít</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 20px; }
+.question { padding: 12px; margin-bottom: 12px; border: 1px solid #ddd; border-radius: 8px; }
+.correct { background:#d4edda; }
+.wrong { background:#f8d7da; }
+label { display:block; margin:4px 0; }
+button { padding:10px 18px; font-size:16px; cursor:pointer; }
+#result { margin-top:20px; font-size:18px; font-weight:bold; }
+</style>
+</head>
+<body>
+
+<h2>UML Quiz 6 – Diagram aktivít</h2>
+
+<div id="quiz"></div>
+<button onclick="checkAnswers()">Vyhodnotiť</button>
+<div id="result"></div>
+
+<script>
+const questions = [
+{q:"1. Tok riadenia môžeme vždy vynechať:", options:["Ak vieme určiť poradie aktivít inak","Vždy","Nikdy","Len pri UI"], correct:[0], multi:false},
+
+{q:"2. Aký je rozdiel medzi aktivitou a akciou?", options:["Aktivita sa môže skladať z akcií","Akcia je (na rozdiel od aktivity) ďalej nedeliteľná na menšie časti","Obe sú rovnaké","Akcia je diagram"], correct:[0,1], multi:true},
+
+{q:"3. Ak je medzi aktivitami tok riadenia:", options:["Vieme určiť poradie aktivít","Zmazať aktivity","UI návrh","DB návrh"], correct:[0], multi:false},
+
+{q:"4. Ak potrebujeme zobraziť rozdelenie aktivít na paralelne vykonávané aktivity:", options:["Použijeme prvok fork, do ktorého príde jeden tok riadenia a z ktorého pôjde niekoľko paralelných tokov riadenia","Sekvenčné aktivity","Zmazanie toku","UI zobrazenie"], correct:[0], multi:false},
+
+{q:"5. Na menšie časti nedeliteľná činnosť v diagrame aktivít sa nazýva:", options:["Akcia","Aktivita","Proces","Diagram"], correct:[0], multi:false},
+
+{q:"6. Ak je v diagrame aktivít tok objektov:", options:["Niekedy vieme určiť poradie aktivít","Vieme určiť, ktoré objekty vstupujú do aktivity","Vieme určiť, ktoré objekty vystupujú z aktivity","Všetko"], correct:[0,1,2], multi:true},
+
+{q:"7. Ak je podmienka pre rozhodovanie znázornená priamo na prechode z aktivity:", options:["Je to v poriadku","Chyba","Zakázaná","UI prvok"], correct:[0], multi:false},
+
+{q:"8. Plavecké dráhy používame:", options:["Na zobrazenie zodpovednosti za aktivity","UI","DB","Kód"], correct:[0], multi:false},
+
+{q:"9. V ktorom UML diagrame môžeme použiť plavecké dráhy (swimlanes)?", options:["Aktivít","Class diagram","Use case","State diagram"], correct:[0], multi:false},
+
+{q:"10. Vzťahy v AD môžu byť vyjadrené:", options:["Tokom riadenia","Tokom objektov","Dedičnosť","Kompozícia"], correct:[0,1], multi:true},
+
+{q:"11. Možnosť vetvenia v aktivity diagramoch:", options:["Môže mať viac ako dve podmienky","Zobrazujeme pomocou diamantu (kosoštvorec)","Kruh","Štvorec"], correct:[0,1], multi:true},
+
+{q:"12. Pre aktivity a objekty platí:", options:["Ak je objekt výstupom z aktivity, môže byť vstupom do nasledujúcej aktivity","Ak je objekt výstupom z aktivity, môže byť vstupom do niektorej aktivity","Iba vstup","Nič"], correct:[0,1], multi:true},
+
+{q:"13. Na zobrazenie prijatia signálu používame:", options:["Symbol konkávneho (vyhĺbeného) päťuholníka","Kruh","Štvorec","Šípka"], correct:[0], multi:false},
+
+{q:"14. Rozšírené regióny (expansion regions) používame ak:", options:["Chceme vykonať rovnaké aktivity postupne pre všetky prvky kolekcie","DB join","UI render","Zmazanie"], correct:[0], multi:false},
+
+{q:"15. Diagram aktivít môže mať:", options:["Jeden začiatok a tri konce","Jeden začiatok a jeden koniec","Viac začiatkov","Len konce"], correct:[0,1], multi:true},
+
+{q:"16. Diagram aktivít patrí medzi:", options:["Diagramy správania","Štrukturálne","DB","UI"], correct:[0], multi:false},
+
+{q:"17. Diagram aktivít používame na:", options:["Znázornenie zodpovednosti prvkov systému za jednotlivé aktivity","Zobrazenie poradia aktivít počas vykonávania prípadu použitia","DB model","UI design"], correct:[0,1], multi:true},
+
+{q:"18. Podmienka v aktivity diagrame:", options:["Musí byť výraz nadobúdajúci hodnoty true alebo false","Sa píše na prechody (čiary) medzi aktivitami v hranatých zátvorkách","Obrázok","Tabuľka"], correct:[0,1], multi:true}
+];
+
+function shuffle(a){return a.sort(()=>Math.random()-0.5);}
+
+function render(){
+const c=document.getElementById("quiz");
+c.innerHTML="";
+shuffle(questions).forEach((q,i)=>{
+let div=document.createElement("div");
+div.className="question";
+let opts=shuffle(q.options.map((o,idx)=>({o,idx}))).map(opt=>
+`<label><input type='${q.multi?"checkbox":"radio"}' name='q${i}' value='${opt.idx}'> ${opt.o}</label>`
+).join("");
+
+div.innerHTML=`<p>${q.q}</p>`+opts;
+div.dataset.correct=JSON.stringify(q.correct);
+c.appendChild(div);
+});
+}
+
+function checkAnswers(){
+let score=0;
+document.querySelectorAll(".question").forEach(div=>{
+let correct=JSON.parse(div.dataset.correct);
+let inputs=div.querySelectorAll("input");
+let selected=[];
+inputs.forEach(i=>{if(i.checked) selected.push(parseInt(i.value));});
+
+let ok=JSON.stringify(selected.sort())===JSON.stringify(correct.sort());
+
+div.classList.remove("correct","wrong");
+
+if(ok){score++; div.classList.add("correct");}
+else{
+div.classList.add("wrong");
+inputs.forEach(i=>{
+if(correct.includes(parseInt(i.value))){i.parentElement.style.background="#d4edda";}
+});
+}
+});
+
+document.getElementById("result").innerText=`Výsledok: ${score} / 18`;
+}
+
+render();
+</script>
+
+</body>
+</html>
