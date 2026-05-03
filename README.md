@@ -1,2 +1,1 @@
-# uml-quiz
-# uml-quiz
+Softverove modelovanie quiz
