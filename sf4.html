@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="sk">
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
 <title>UML Quiz 4 - Stavový diagram</title>
 <style>
@@ -18,7 +19,11 @@ button { padding:10px 18px; font-size:16px; cursor:pointer; }
 <h2>UML Quiz 4 – Stavový diagram</h2>
 
 <div id="quiz"></div>
-<button onclick="checkAnswers()">Vyhodnotiť</button>
+<button type="button" onclick="checkAnswers()">Vyhodnotiť</button>
+
+<button type="button" onclick="location.href='index.html'">
+    Späť na hlavnú stránku
+</button>
 <div id="result"></div>
 
 <script>
@@ -31,7 +36,7 @@ const questions = [
 
 {q:"4. Slovo do v stave označuje:", options:["Príkaz na vykonanie aktivity v stave","Prechod","Atribút","Metódu"], correct:[0], multi:true},
 
-{q:"5. Slovo defer v stavovom diagrame používame na označenie:", options:["Odloženej udalosti","Zmazanej udalosti","Aktívnej udalosti","Chyby"], correct:[0], multi:false},
+{q:"5. Slovo defer v stavovom diagrame používame na označenie:", options:["Odloženej udalosti","Zmazanej udalosti","Aktívnej udalosti","Chyby"], correct:[0], multi:true},
 
 {q:"6. History stav nám umožňuje:", options:["Návrat do posledného aktívneho substavu v sekvenčných substavoch","Reset systému","Zmazanie stavov","UI návrat"], correct:[0], multi:true},
 
@@ -41,7 +46,7 @@ const questions = [
 
 {q:"9. Stav v stavovom diagrame:", options:["Popisuje konkrétnu situáciu, v ktorej sa prvok nachádza počas svojho životného cyklu","Metóda","Diagram","DB tabuľka"], correct:[0], multi:true},
 
-{q:"10. Zložený stav (composite state):", options:["Musí obsahovať súbežné (orthogonal) alebo sekvenčné (nonorthogonal) substavy","Je vždy prázdny","Nemá stav","Je metóda"], correct:[0], multi:false},
+{q:"10. Zložený stav (composite state):", options:["Musí obsahovať súbežné (orthogonal) alebo sekvenčné (nonorthogonal) substavy","Je vždy prázdny","Nemá stav","Je metóda"], correct:[0], multi:true},
 
 {q:"11. Prechod vzplanie, stane sa aktívnym:", options:["Aj keď sa nič nestane","Ak nastane spúšťacia udalosť (event trigger)","Náhodne","UI klikom vždy"], correct:[0,1], multi:true},
 

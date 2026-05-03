@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="sk">
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
 <title>UML Quiz 9 - Záverečný mix</title>
 <style>
@@ -18,90 +19,94 @@ button { padding:10px 18px; font-size:16px; cursor:pointer; }
 <h2>UML Quiz 9 – Záverečný mix</h2>
 
 <div id="quiz"></div>
-<button onclick="checkAnswers()">Vyhodnotiť</button>
+<button type="button" onclick="checkAnswers()">Vyhodnotiť</button>
+
+<button type="button" onclick="location.href='index.html'">
+    Späť na hlavnú stránku
+</button>
 <div id="result"></div>
 
 <script>
 const questions = [
-{q:"1. UML je", options:["Vizuálny jazyk na modelovanie","Programovací jazyk","Databáza","Framework"], correct:[0], multi:false},
+{q:"1. UML je", options:["Vizuálny jazyk na modelovanie","Programovací jazyk","Databáza","Framework"], correct:[0], multi:true},
 
-{q:"2. Konektor sa používa v", options:["Diagrame zložených štruktúr","Use case diagrame","State diagrame","OCL"], correct:[0], multi:false},
+{q:"2. Konektor sa používa v", options:["Diagrame zložených štruktúr","Use case diagrame","State diagrame","OCL"], correct:[0], multi:true},
 
-{q:"3. V diagrame aktivít môže byť", options:["Jeden koniec","Žiadny koniec","Len triedy","Len aktéri"], correct:[0], multi:false},
+{q:"3. V diagrame aktivít môže byť", options:["Jeden koniec","Žiadny koniec","Len triedy","Len aktéri"], correct:[0], multi:true},
 
-{q:"4. Slovo do v stave v stavovom diagrame označuje", options:["Príkaz na vykonanie aktivity v stave","Atribút","Triedu","Komponent"], correct:[0], multi:false},
+{q:"4. Slovo do v stave v stavovom diagrame označuje", options:["Príkaz na vykonanie aktivity v stave","Atribút","Triedu","Komponent"], correct:[0], multi:true},
 
-{q:"5. Pri popise MDA sa používa pojem PIM. Čo znamená?", options:["Platformovo nezávislý model","Procesný interný model","Public interface model","Physical implementation model"], correct:[0], multi:false},
+{q:"5. Pri popise MDA sa používa pojem PIM. Čo znamená?", options:["Platformovo nezávislý model","Procesný interný model","Public interface model","Physical implementation model"], correct:[0], multi:true},
 
-{q:"6. Ak komponent poskytuje rozhranie modelujeme vzťah rozhranie - komponent vzťahom", options:["Realizácia","Asociácia","Extend","Dependency"], correct:[0], multi:false},
+{q:"6. Ak komponent poskytuje rozhranie modelujeme vzťah rozhranie - komponent vzťahom", options:["Realizácia","Asociácia","Extend","Dependency"], correct:[0], multi:true},
 
 {q:"7. Medzi dvoma prípadmi použitia môžeme použiť vzťah", options:["Závislosť","Generalizácia","Kompozícia","Agregácia"], correct:[0,1], multi:true},
 
-{q:"8. Časový priebeh komunikácií v komunikačnom diagrame", options:["Môžeme zistiť inak","Je striktne daný","Neexistuje","Je náhodný"], correct:[0], multi:false},
+{q:"8. Časový priebeh komunikácií v komunikačnom diagrame", options:["Môžeme zistiť inak","Je striktne daný","Neexistuje","Je náhodný"], correct:[0], multi:true},
 
-{q:"9. Vzťahy medzi aktivitami v diagrame aktivít môžu byť vyjadrené tokom", options:["Riadenia","Dedičnosti","Kompozície","Realizácie"], correct:[0], multi:false},
+{q:"9. Vzťahy medzi aktivitami v diagrame aktivít môžu byť vyjadrené tokom", options:["Riadenia","Dedičnosti","Kompozície","Realizácie"], correct:[0], multi:true},
 
-{q:"10. Označte typ udalosti, ktorá býva zvyčajne synchrónna", options:["Volanie (Call event)","Signal event","Timer","Exit event"], correct:[0], multi:false},
+{q:"10. Označte typ udalosti, ktorá býva zvyčajne synchrónna", options:["Volanie (Call event)","Signal event","Timer","Exit event"], correct:[0], multi:true},
 
-{q:"11. Označte typ UML diagramu, v ktorom môžeme použíť plavecké dráhy", options:["V diagrame aktivít","Class diagrame","State diagrame","Sequence diagrame"], correct:[0], multi:false},
+{q:"11. Označte typ UML diagramu, v ktorom môžeme použíť plavecké dráhy", options:["V diagrame aktivít","Class diagrame","State diagrame","Sequence diagrame"], correct:[0], multi:true},
 
 {q:"12. V diagrame aktivít môže byť", options:["Jeden koniec","Dva začiatky","Tri konce","Žiadne pravidlá"], correct:[0,1,2], multi:true},
 
-{q:"13. Vzťah trieda - objekt je principiálne rovnaký ako vzťah asociácia - ?", options:["Väzba","Atribút","Metóda","Diagram"], correct:[0], multi:false},
+{q:"13. Vzťah trieda - objekt je principiálne rovnaký ako vzťah asociácia - ?", options:["Väzba","Atribút","Metóda","Diagram"], correct:[0], multi:true},
 
-{q:"14. Artefakt", options:["Je fyzická časť systému","Logická trieda","Use case","Stav"], correct:[0], multi:false},
+{q:"14. Artefakt", options:["Je fyzická časť systému","Logická trieda","Use case","Stav"], correct:[0], multi:true},
 
-{q:"15. Invariant", options:["Je OCL výraz, ktorý má vždy hodnotu true","UI pravidlo","DB tabuľka","Metóda"], correct:[0], multi:false},
+{q:"15. Invariant", options:["Je OCL výraz, ktorý má vždy hodnotu true","UI pravidlo","DB tabuľka","Metóda"], correct:[0], multi:true},
 
-{q:"16. Pod pojmom klasifikátor v UML rozumieme prvok, ktorý", options:["Môže mať inštancie","Je len metóda","Je UI prvok","Je DB"], correct:[0], multi:false},
+{q:"16. Pod pojmom klasifikátor v UML rozumieme prvok, ktorý", options:["Môže mať inštancie","Je len metóda","Je UI prvok","Je DB"], correct:[0], multi:true},
 
-{q:"17. Časový diagram", options:["Patrí medzi diagramy správania","Štrukturálny","DB diagram","UI diagram"], correct:[0], multi:false},
+{q:"17. Časový diagram", options:["Patrí medzi diagramy správania","Štrukturálny","DB diagram","UI diagram"], correct:[0], multi:true},
 
-{q:"18. Časový priebeh komunikácií v sekvenčnom diagrame", options:["Je reprezentovaný vertikálnou osou","Horizontálnou osou","Náhodnou osou","Žiadnou osou"], correct:[0], multi:false},
+{q:"18. Časový priebeh komunikácií v sekvenčnom diagrame", options:["Je reprezentovaný vertikálnou osou","Horizontálnou osou","Náhodnou osou","Žiadnou osou"], correct:[0], multi:true},
 
-{q:"19. Závislosť typu manifest je vzťahom medzi", options:["Artefaktom a triedami, ktoré implementuje","Aktérom a use case","Stavom a prechodom","UI a DB"], correct:[0], multi:false},
+{q:"19. Závislosť typu manifest je vzťahom medzi", options:["Artefaktom a triedami, ktoré implementuje","Aktérom a use case","Stavom a prechodom","UI a DB"], correct:[0], multi:true},
 
-{q:"20. Slovo defer v stave v stavovom diagrame označuje", options:["Príkaz na odloženie udalosti do iného stavu","Zmazanú udalosť","Aktivitu","Atribút"], correct:[0], multi:false},
+{q:"20. Slovo defer v stave v stavovom diagrame označuje", options:["Príkaz na odloženie udalosti do iného stavu","Zmazanú udalosť","Aktivitu","Atribút"], correct:[0], multi:true},
 
-{q:"21. Ak komponent požaduje rozhranie vzťah rozhranie - komponent modelujeme vzťahom", options:["Realizácia","Extend","Include","Association"], correct:[0], multi:false},
+{q:"21. Ak komponent požaduje rozhranie vzťah rozhranie - komponent modelujeme vzťahom", options:["Realizácia","Extend","Include","Association"], correct:[0], multi:true},
 
-{q:"22. Medzi prípadom použitia a aktorom môžeme použiť vzťah", options:["Asociácia","Kompozícia","Realizácia","Dependency"], correct:[0], multi:false},
+{q:"22. Medzi prípadom použitia a aktorom môžeme použiť vzťah", options:["Asociácia","Kompozícia","Realizácia","Dependency"], correct:[0], multi:true},
 
-{q:"23. Diagram prehľadu interakcií", options:["Patrí medzi diagramy správania","Class diagram","State diagram","ER diagram"], correct:[0], multi:false},
+{q:"23. Diagram prehľadu interakcií", options:["Patrí medzi diagramy správania","Class diagram","State diagram","ER diagram"], correct:[0], multi:true},
 
-{q:"24. Vzťah asociácia - väzba je principiálne rovnaký vzťah ako vzťah ? - objekt", options:["Trieda","Objekt","Atribút","Metóda"], correct:[0], multi:false},
+{q:"24. Vzťah asociácia - väzba je principiálne rovnaký vzťah ako vzťah ? - objekt", options:["Trieda","Objekt","Atribút","Metóda"], correct:[0], multi:true},
 
 {q:"25. Stereotyp <<reside>> označuje závislosť kde", options:["Trieda môže byť vo viacerých komponentoch","Balíček môže byť vo viacerých komponentoch","Dedičnosť","UI"], correct:[0,1], multi:true},
 
-{q:"26. Diagram prípadov použitia patrí medzi", options:["Diagramy správania","Štrukturálne","DB","UI"], correct:[0], multi:false},
+{q:"26. Diagram prípadov použitia patrí medzi", options:["Diagramy správania","Štrukturálne","DB","UI"], correct:[0], multi:true},
 
 {q:"27. Pod pojmom softvérový model rozumieme", options:["Súhrn rôznych pohľadov na systém","Abstrakcia reálneho systému","Kód","UI"], correct:[0,1], multi:true},
 
-{q:"28. Iterácie sa v komunikačnom diagrame označujú", options:["Hviezdičkou a hranatými zátvorkami *[podmienka iterácia]","#loop","@iter","!repeat"], correct:[0], multi:false},
+{q:"28. Iterácie sa v komunikačnom diagrame označujú", options:["Hviezdičkou a hranatými zátvorkami *[podmienka iterácia]","#loop","@iter","!repeat"], correct:[0], multi:true},
 
 {q:"29. Návrhové vzory sú založené na", options:["Programovaní do rozhrania","Uprednostňovaní kompozície pred dedičnosťou","SQL","UI"], correct:[0,1], multi:true},
 
-{q:"30. Pre znázornenie vzťahov a interakcií medzi prvkami interakcie použijeme diagram", options:["Komunikačný","Class diagram","State diagram","Use case"], correct:[0], multi:false},
+{q:"30. Pre znázornenie vzťahov a interakcií medzi prvkami interakcie použijeme diagram", options:["Komunikačný","Class diagram","State diagram","Use case"], correct:[0], multi:true},
 
-{q:"31. V diagrame aktivít môže byť", options:["Jeden počiatočný stav","Dva","Žiadny","Desať"], correct:[0], multi:false},
+{q:"31. V diagrame aktivít môže byť", options:["Jeden počiatočný stav","Dva","Žiadny","Desať"], correct:[0], multi:true},
 
-{q:"32. Časový priebeh komunikácií v komunikačnom diagrame sa dá zistiť", options:["Číslovaním správ","Náhodne","UI","DB"], correct:[0], multi:false},
+{q:"32. Časový priebeh komunikácií v komunikačnom diagrame sa dá zistiť", options:["Číslovaním správ","Náhodne","UI","DB"], correct:[0], multi:true},
 
-{q:"33. Stavový diagram", options:["Patrí medzi diagramy správania","Štrukturálne","DB","UI"], correct:[0], multi:false},
+{q:"33. Stavový diagram", options:["Patrí medzi diagramy správania","Štrukturálne","DB","UI"], correct:[0], multi:true},
 
-{q:"34. Časový priebeh komunikácií v sekvenčnom diagrame", options:["Je reprezentovaný horizontálnou osou","Vertikálnou osou","Náhodnou","Žiadnou"], correct:[0], multi:false},
+{q:"34. Časový priebeh komunikácií v sekvenčnom diagrame", options:["Je reprezentovaný horizontálnou osou","Vertikálnou osou","Náhodnou","Žiadnou"], correct:[0], multi:true},
 
-{q:"35. V hranatých zátvorkách je v stavovom diagrame", options:["Ochranná podmienka","Atribút","Metóda","UI"], correct:[0], multi:false},
+{q:"35. V hranatých zátvorkách je v stavovom diagrame", options:["Ochranná podmienka","Atribút","Metóda","UI"], correct:[0], multi:true},
 
-{q:"36. Poslanie signálu je", options:["Asynchrónna udalosť","Synchrónna","DB","UI"], correct:[0], multi:false},
+{q:"36. Poslanie signálu je", options:["Asynchrónna udalosť","Synchrónna","DB","UI"], correct:[0], multi:true},
 
-{q:"37. Vysvetlite rozdiel medzi tenkým a hrubým klientom", options:["Tenký klient - málo výpočtovej kapacity, hrubý klient - vykonáva aj logiku","DB rozdiel","Diagram","UC"], correct:[0], multi:false},
+{q:"37. Vysvetlite rozdiel medzi tenkým a hrubým klientom", options:["Tenký klient - málo výpočtovej kapacity, hrubý klient - vykonáva aj logiku","DB rozdiel","Diagram","UC"], correct:[0], multi:true},
 
 {q:"38. Do podskupiny interakčných diagramov v UML patrí", options:["Sekvenčný","Časový","Class","ER"], correct:[0,1], multi:true},
 
-{q:"39. Pre vzťahy kompozícia a agregácia platí že", options:["Kompozícia je silnejší vzťah ako agregácia","Agregácia je silnejšia","Rovnaké","Nie sú vzťah"], correct:[0], multi:false},
+{q:"39. Pre vzťahy kompozícia a agregácia platí že", options:["Kompozícia je silnejší vzťah ako agregácia","Agregácia je silnejšia","Rovnaké","Nie sú vzťah"], correct:[0], multi:true},
 
-{q:"40. Vzťah generalizácia môžeme použiť v", options:["Diagrame prípadov použitia","Len class diagram","Len state","Len OCL"], correct:[0], multi:false}
+{q:"40. Vzťah generalizácia môžeme použiť v", options:["Diagrame prípadov použitia","Len class diagram","Len state","Len OCL"], correct:[0], multi:true}
 ];
 
 function shuffle(a){return a.sort(()=>Math.random()-0.5);}
