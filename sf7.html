@@ -3,7 +3,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
-<title>UML Quiz 7 - OCL</title>
+<title>SF Quiz 7 - OCL</title>
 <style>
 body { font-family: Arial, sans-serif; margin: 20px; }
 .question { padding: 12px; margin-bottom: 12px; border: 1px solid #ddd; border-radius: 8px; }
@@ -16,7 +16,7 @@ button { padding:10px 18px; font-size:16px; cursor:pointer; }
 </head>
 <body>
 
-<h2>UML Quiz 7 – OCL</h2>
+<h2>SF Quiz 7 – OCL</h2>
 
 <div id="quiz"></div>
 <button type="button" onclick="checkAnswers()">Vyhodnotiť</button>
@@ -28,35 +28,21 @@ button { padding:10px 18px; font-size:16px; cursor:pointer; }
 
 <script>
 const questions = [
-{q:"1. Operácia bez vedľajších účinkov", options:["Nemôže modifikovať atribúty objektu","Mení stav objektu","Mení triedu","Je UI operácia"], correct:[0], multi:true},
-
-{q:"2. Kľúčové slovo derive označuje", options:["OCL výraz pre odvodenie hodnoty atribútu","UI prvok","DB index","Triedu"], correct:[0], multi:true},
-
+{q:"1. Operácia bez vedľajších účinkov", options:["Nemôže modifikovať atribúty objektu","Mení interný stav objektu","Mení štruktúru triedy počas behu","Je UI operácia v systéme"], correct:[0], multi:true},
+{q:"2. Kľúčové slovo derive označuje", options:["OCL výraz pre odvodenie hodnoty atribútu","Definovanie grafického prvku v modeli","Indexovanie dát v databáze","Definovanie triedy v UML diagrame"], correct:[0], multi:true},
 {q:"3. Skratka OCL znamená", options:["Object Constraint Language","Object Class Layer","Operational Code Language","Open Constraint Logic"], correct:[0], multi:true},
-
 {q:"4. Medzi základné preddefinované typy nepatrí", options:["Char","Integer","Boolean","Real"], correct:[0], multi:true},
-
-{q:"5. Pre násobnosť v OCL vzťahu medzi prvkami väčšiu ako 1", options:["Používame v OCL výraze odkaz cez ->","Môžeme použiť operáciu select","for loop","SQL join"], correct:[0,1], multi:true},
-
-{q:"6. Jazyk OCL môžeme použiť", options:["Pri písaní pre a post podmienok pre operácie","Pri písaní odvodených pravidiel pre atribúty","UI návrh","DB schéma"], correct:[0,1], multi:true},
-
-{q:"7. OCL výraz", options:["Je bez vedľajších účinkov","Je mutabilný","Je UI prvok","Je kód"], correct:[0], multi:true},
-
-{q:"8. Pri vytváraní OCL výrazov pre reťazce môžeme použiť operátor", options:["<>","=","+ len","SQL LIKE"], correct:[0,1], multi:true},
-
-{q:"9. Kľúčové slovo body označuje výraz", options:["Pre telo operácie","Atribút","Triedu","Diagram"], correct:[0], multi:true},
-
-{q:"10. Operátory +-*/ sú používané ako", options:["Infix operátory","Prefix","Postfix","UI operátory"], correct:[0], multi:true},
-
-{q:"11. Prístup k atribútom inej triedy v OCL výraze", options:["Je povolený k public atribútom","Je zakázaný k private atribútom","Vždy zakázaný","Len UI"], correct:[0,1], multi:true},
-
-{q:"12. Pojem invariant", options:["Označuje OCL výraz, ktorý má vždy hodnotu true","UI stav","DB tabuľka","Metóda"], correct:[0], multi:true},
-
-{q:"13. Kľúčové slovo post označuje", options:["Výraz pre ukončenie operácie","Začiatok","UI event","DB commit"], correct:[0], multi:true},
-
-{q:"14. Jazyk OCL je", options:["Typový jazyk","Formálny jazyk","UI jazyk","DB jazyk"], correct:[0,1], multi:true},
-
-{q:"15. Kľúčové slovo self odkazuje v OCL výraze na", options:["Kontextovú inštanciu v OCL","Inú triedu","DB","UI"], correct:[0], multi:true}
+{q:"5. Pre násobnosť v OCL vzťahu medzi prvkami väčšiu ako 1", options:["Používame v OCL výraze odkaz cez ->","Používame SQL join operácie","Používame cyklus for","Používame mapovanie tabuliek v databáze"], correct:[0,1], multi:true},
+{q:"6. Jazyk OCL môžeme použiť", options:["Pri písaní pre a post podmienok pre operácie","Pri písaní odvodených pravidiel pre atribúty","Pri návrhu používateľského rozhrania","Pri návrhu relačnej databázy"], correct:[0,1], multi:true},
+{q:"7. OCL výraz", options:["Je bez vedľajších účinkov","Môže meniť stav systému","Je interaktívny UI prvok","Je priamo spustiteľný program"], correct:[0], multi:true},
+{q:"8. Pri vytváraní OCL výrazov pre reťazce môžeme použiť operátor", options:["<>","=","+ len pre číselné typy","SQL LIKE výraz"], correct:[0,1], multi:true},
+{q:"9. Kľúčové slovo body označuje výraz", options:["Pre telo operácie","Atribút triedy","Definíciu diagramu","UI komponent"], correct:[0], multi:true},
+{q:"10. Operátory +-*/ sú používané ako", options:["Infix operátory","Prefix operátory","Postfix operátory","Grafické operátory UML"], correct:[0], multi:true},
+{q:"11. Prístup k atribútom inej triedy v OCL výraze", options:["Je povolený k public atribútom","Je zakázaný k private atribútom","Je vždy zakázaný bez výnimky","Je možný len cez UI vrstvy"], correct:[0,1], multi:true},
+{q:"12. Pojem invariant", options:["Označuje OCL výraz, ktorý má vždy hodnotu true","Predstavuje stav UI komponentu","Je databázová tabuľka","Je typ metódy v triede"], correct:[0], multi:true},
+{q:"13. Kľúčové slovo post označuje", options:["Výraz pre ukončenie operácie","Začiatok operácie","UI udalosť","Potvrdenie databázovej transakcie"], correct:[0], multi:true},
+{q:"14. Jazyk OCL je", options:["Typový jazyk","Formálny špecifikačný jazyk","Grafický UI jazyk","Dotazovací databázový jazyk"], correct:[0,1], multi:true},
+{q:"15. Kľúčové slovo self odkazuje v OCL výraze na", options:["Kontextovú inštanciu v OCL","Inú náhodnú triedu","Externú databázu","Používateľské rozhranie"], correct:[0], multi:true}
 ];
 
 function shuffle(a){return a.sort(()=>Math.random()-0.5);}

@@ -3,7 +3,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
-<title>UML Quiz 4 - Stavový diagram</title>
+<title>SF Quiz 4 - Stavový diagram</title>
 <style>
 body { font-family: Arial, sans-serif; margin: 20px; }
 .question { padding: 12px; margin-bottom: 12px; border: 1px solid #ddd; border-radius: 8px; }
@@ -16,7 +16,7 @@ button { padding:10px 18px; font-size:16px; cursor:pointer; }
 </head>
 <body>
 
-<h2>UML Quiz 4 – Stavový diagram</h2>
+<h2>SF Quiz 4 – Stavový diagram</h2>
 
 <div id="quiz"></div>
 <button type="button" onclick="checkAnswers()">Vyhodnotiť</button>
@@ -28,45 +28,45 @@ button { padding:10px 18px; font-size:16px; cursor:pointer; }
 
 <script>
 const questions = [
-{q:"1. V stavovom diagrame môže byť:", options:["Dva koncové stavy","Jeden koncový stav","Jeden počiatočný stav","Žiadny stav"], correct:[0,1,2], multi:true},
+{q:"1. V stavovom diagrame môže byť:", options:["Dva koncové stavy","Jeden koncový stav","Jeden počiatočný stav","Viacero počiatočných stavov v rôznych častiach diagramu"], correct:[0,1,2], multi:true},
 
-{q:"2. Spúšťacia udalosť (event trigger) začínajúca slovom when:", options:["Označuje tzv. change udalosť","Označuje udalosť vyhodnocovanú kontinuálne","UI udalosť","Chybu"], correct:[0,1], multi:true},
+{q:"2. Spúšťacia udalosť (event trigger) začínajúca slovom when:", options:["Označuje tzv. change udalosť","Označuje udalosť vyhodnocovanú kontinuálne","Reprezentuje časovo alebo stavovo podmienenú udalosť","Signalizuje zmenu hodnoty v systéme"], correct:[0,1], multi:true},
 
-{q:"3. Modelovanie stavov:", options:["Je súčasťou modelovania správania","Je databáza","Je UI","Je kód"], correct:[0], multi:true},
+{q:"3. Modelovanie stavov:", options:["Je súčasťou modelovania správania","Je opis životného cyklu objektu","Je štrukturálny model","Je implementačná technika"], correct:[0], multi:true},
 
-{q:"4. Slovo do v stave označuje:", options:["Príkaz na vykonanie aktivity v stave","Prechod","Atribút","Metódu"], correct:[0], multi:true},
+{q:"4. Slovo do v stave označuje:", options:["Príkaz na vykonanie aktivity v stave","Prechod medzi stavmi","Vstupný atribút stavu","Volanie metódy objektu"], correct:[0], multi:true},
 
-{q:"5. Slovo defer v stavovom diagrame používame na označenie:", options:["Odloženej udalosti","Zmazanej udalosti","Aktívnej udalosti","Chyby"], correct:[0], multi:true},
+{q:"5. Slovo defer v stavovom diagrame používame na označenie:", options:["Odloženej udalosti","Udalosti spracovanej neskôr v inom stave","Ignorovanej udalosti","Chybového stavu"], correct:[0], multi:true},
 
-{q:"6. History stav nám umožňuje:", options:["Návrat do posledného aktívneho substavu v sekvenčných substavoch","Reset systému","Zmazanie stavov","UI návrat"], correct:[0], multi:true},
+{q:"6. History stav nám umožňuje:", options:["Návrat do posledného aktívneho substavu v sekvenčných substavoch","Obnoviť posledný známy stav systému","Reset systému do počiatočného stavu","Simulovať návrat v čase"], correct:[0], multi:true},
 
-{q:"7. Entry efekt sa vykoná:", options:["Pri každom vstupe do stavu","Pri self prechode v stave","Pri výstupe","Nikdy"], correct:[0,1], multi:true},
+{q:"7. Entry efekt sa vykoná:", options:["Pri každom vstupe do stavu","Pri self prechode v stave","Pri prvotnom inicializačnom vstupe","Pri prechode z iného stavu"], correct:[0,1], multi:true},
 
-{q:"8. Prechod medzi stavmi sa môže popisovať:", options:["Udalosťou","Udalosť/akcia","Atribútom","Triedou"], correct:[0,1], multi:true},
+{q:"8. Prechod medzi stavmi sa môže popisovať:", options:["Udalosťou","Udalosť/akcia","Guard podmienkou","Kombináciou udalosti a efektu"], correct:[0,1], multi:true},
 
-{q:"9. Stav v stavovom diagrame:", options:["Popisuje konkrétnu situáciu, v ktorej sa prvok nachádza počas svojho životného cyklu","Metóda","Diagram","DB tabuľka"], correct:[0], multi:true},
+{q:"9. Stav v stavovom diagrame:", options:["Popisuje konkrétnu situáciu, v ktorej sa prvok nachádza počas svojho životného cyklu","Definuje podmienky správania objektu","Zachytáva statický stav systému","Je iba pomenovanie triedy"], correct:[0], multi:true},
 
-{q:"10. Zložený stav (composite state):", options:["Musí obsahovať súbežné (orthogonal) alebo sekvenčné (nonorthogonal) substavy","Je vždy prázdny","Nemá stav","Je metóda"], correct:[0], multi:true},
+{q:"10. Zložený stav (composite state):", options:["Musí obsahovať súbežné (orthogonal) alebo sekvenčné (nonorthogonal) substavy","Môže obsahovať vnorené stavy","Je vždy prázdny","Slúži len na vizuálne rozdelenie diagramu"], correct:[0], multi:true},
 
-{q:"11. Prechod vzplanie, stane sa aktívnym:", options:["Aj keď sa nič nestane","Ak nastane spúšťacia udalosť (event trigger)","Náhodne","UI klikom vždy"], correct:[0,1], multi:true},
+{q:"11. Prechod vzplanie, stane sa aktívnym:", options:["Aj keď sa nič nestane","Ak nastane spúšťacia udalosť (event trigger)","Pri splnení guard podmienky","Na základe časovej udalosti"], correct:[0,1], multi:true},
 
-{q:"12. Stavový diagram:", options:["Musí mať jeden počiatočný stav","Môže v jednom stave popisovať aj stavy iných prvkov systému","Nemá stav","Je databáza"], correct:[0,1], multi:true},
+{q:"12. Stavový diagram:", options:["Musí mať jeden počiatočný stav","Môže v jednom stave popisovať aj stavy iných prvkov systému","Môže obsahovať viac úrovní abstrakcie","Modeluje správanie jedného objektu"], correct:[0,1], multi:true},
 
-{q:"13. Exit efekt sa vykoná:", options:["Pri každom opustení stavu","Pri self prechode v stave","Pri ničnerobení","Len UI"], correct:[0,1], multi:true},
+{q:"13. Exit efekt sa vykoná:", options:["Pri každom opustení stavu","Pri self prechode v stave","Pred vstupom do iného stavu","Pri zrušení prechodu"], correct:[0,1], multi:true},
 
-{q:"14. Automatický prechod:", options:["Nemá spúšťaciu udalosť a nemusí mať efekt","Musí mať event","Nemá stav","Je chyba"], correct:[0], multi:true},
+{q:"14. Automatický prechod:", options:["Nemá spúšťaciu udalosť a nemusí mať efekt","Prebieha okamžite po splnení podmienky","Je vždy časovo riadený","Vyžaduje externý trigger"], correct:[0], multi:true},
 
-{q:"15. Označte správne poradie častí prechodu v UML:", options:["Spúšťacia udalosť / efekt","effect/event/guard","Spúšťacia udalosť [ochranná podmienka]","random"], correct:[0,2], multi:true},
+{q:"15. Označte správne poradie častí prechodu v UML:", options:["Spúšťacia udalosť / efekt","effect/event/guard","Spúšťacia udalosť [ochranná podmienka]","event [guard] / effect"], correct:[0,2], multi:true},
 
-{q:"16. Stavový diagram zvyčajne:", options:["Popisuje správanie jedného prvku systému","Popisuje stavy jedného prvku systému","Popisuje UI","Popisuje sieť"], correct:[0,1], multi:true},
+{q:"16. Stavový diagram zvyčajne:", options:["Popisuje správanie jedného prvku systému","Popisuje stavy jedného objektu počas jeho životného cyklu","Zachytáva interakcie medzi objektmi","Modeluje dátovú štruktúru systému"], correct:[0,1], multi:true},
 
-{q:"17. Prechod ukazuje vzťah:", options:["Aj od toho istého stavu","Aj medzi dvoma rôznymi stavmi","Len triedy","Len UI"], correct:[0,1], multi:true},
+{q:"17. Prechod ukazuje vzťah:", options:["Aj od toho istého stavu","Aj medzi dvoma rôznymi stavmi","Medzi stavmi objektu","Medzi životnými cyklami objektu"], correct:[0,1], multi:true},
 
-{q:"18. Stavový diagram patrí medzi:", options:["Diagramy správania","Štrukturálne","DB","Kódové"], correct:[0], multi:true},
+{q:"18. Stavový diagram patrí medzi:", options:["Diagramy správania","Behaviorálne UML diagramy","Statické diagramy","Implementačné diagramy"], correct:[0], multi:true},
 
-{q:"19. Akcia v stavovom diagrame:", options:["Reaguje na udalosť","Môže byť adresovaná inému prvku","Je DB","Je trieda"], correct:[0,1], multi:true},
+{q:"19. Akcia v stavovom diagrame:", options:["Reaguje na udalosť","Môže byť adresovaná inému prvku","Vykonáva sa pri prechode alebo v stave","Je súčasťou správania objektu"], correct:[0,1], multi:true},
 
-{q:"20. Udalosť v stavovom diagrame:", options:["Môže mať parametre","Popisuje príjem požiadavky","Je tabuľka","Je trieda"], correct:[0,1], multi:true}
+{q:"20. Udalosť v stavovom diagrame:", options:["Môže mať parametre","Popisuje príjem požiadavky","Môže byť časová alebo signálová","Môže spôsobiť prechod medzi stavmi"], correct:[0,1], multi:true}
 ];
 
 function shuffle(a){return a.sort(()=>Math.random()-0.5);}

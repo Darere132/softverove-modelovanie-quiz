@@ -3,39 +3,21 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
-<title>UML Quiz 2 Full</title>
+<title>SF Quiz 2 Full</title>
 
 <style>
-body { font-family: Arial, sans-serif; margin:20px; }
-.question{
-    padding:12px;
-    margin-bottom:15px;
-    border:1px solid #ddd;
-    border-radius:8px;
-}
-.correct{ background:#d4edda; }
-.wrong{ background:#f8d7da; }
-label{
-    display:block;
-    margin:4px 0;
-    padding:3px;
-    border-radius:4px;
-}
-button{
-    padding:10px 20px;
-    font-size:16px;
-    cursor:pointer;
-}
-#result{
-    font-size:18px;
-    font-weight:bold;
-    margin-top:20px;
-}
+body { font-family: Arial, sans-serif; margin: 20px; }
+.question { padding: 12px; margin-bottom: 12px; border: 1px solid #ddd; border-radius: 8px; }
+.correct { background:#d4edda; }
+.wrong { background:#f8d7da; }
+label { display:block; margin:4px 0; }
+button { padding:10px 18px; font-size:16px; cursor:pointer; }
+#result { margin-top:20px; font-size:18px; font-weight:bold; }
 </style>
 </head>
 <body>
 
-<h2>UML Quiz 2 (45 otázok)</h2>
+<h2>SF Quiz 2 (45 otázok)</h2>
 
 <div id="quiz"></div>
 <button type="button" onclick="checkAnswers()">Vyhodnotiť</button>
@@ -48,95 +30,95 @@ button{
 <script>
 const questions = [
 
-{q:"1. Porovnanie atribútov a asociácií", options:["Atribút môžeme vyjadriť ako asociáciu","Atribút je vždy operácia","Atribút je diagram","Atribút je trieda"], correct:[0], multi:true},
+{q:"1. Porovnanie atribútov a asociácií", options:["Atribút môžeme vyjadriť ako asociáciu","Atribút je implementačný detail objektu","Atribút patrí k správe objektu","Atribút je metóda objektu"], correct:[0], multi:true},
 
-{q:"2. Najjednoduchší štrukturálny vzťah medzi dvoma triedami sa nazýva?", options:["Asociácia","Dedičnosť","Agregácia","Kompozícia"], correct:[0], multi:true},
+{q:"2. Najjednoduchší štrukturálny vzťah medzi dvoma triedami sa nazýva?", options:["Asociácia","Dedičnosť","Závislosť","Interakcia"], correct:[0], multi:true},
 
-{q:"3. Hlavným dôvodom na vytvorenie abstraktnej triedy je:", options:["Možnosť tvorby subtried","Zmazanie kódu","Rýchlejšia databáza","Zníženie UML"], correct:[0], multi:true},
+{q:"3. Hlavným dôvodom na vytvorenie abstraktnej triedy je:", options:["Možnosť tvorby subtried","Zdieľanie spoločného správania","Zjednotenie návrhu hierarchie","Optimalizácia návrhu"], correct:[0], multi:true},
 
-{q:"4. Diagramy tried je možné nakresliť z rôznych perspektív. Ktorá je najčastejšie používaná?", options:["Implementácia","Testovanie","Kompilácia","Architektúra HW"], correct:[0], multi:true},
+{q:"4. Diagramy tried je možné nakresliť z rôznych perspektív. Ktorá je najčastejšie používaná?", options:["Implementácia","Konceptuálny model","Logická štruktúra systému","Doménový model"], correct:[0], multi:true},
 
-{q:"5. Koncová (leaf) trieda:", options:["Nesmie mať žiadnych potomkov","Musí mať 1 potomka","Je abstraktná","Je interface"], correct:[0], multi:true},
+{q:"5. Koncová (leaf) trieda:", options:["Nesmie mať žiadnych potomkov","Nemôže byť ďalej rozšírená","Je finálna trieda","Je uzavretá v hierarchii"], correct:[0], multi:true},
 
-{q:"6. Typovo-inštančná dichotómia vyjadruje, že:", options:["Na vzťahy medzi prvkami sa pozeráme z dvoch hladísk","Trieda má 2 atribúty","Objekt má 2 metódy","Existujú 2 diagramy"], correct:[0], multi:true},
+{q:"6. Typovo-inštančná dichotómia vyjadruje, že:", options:["Na vzťahy medzi prvkami sa pozeráme z dvoch hladísk","Rozlišujeme triedu a objekt","Modelujeme typ a jeho inštanciu","Existuje dvojúrovňový pohľad na model"], correct:[0], multi:true},
 
-{q:"7. Aký druh tried ešte poznáme?", options:["Typové triedy","Databázové triedy","UI triedy","Service triedy"], correct:[0], multi:true},
+{q:"7. Aký druh tried ešte poznáme?", options:["Typové triedy","Abstraktné triedy","Interface","Konkrétne triedy"], correct:[0], multi:true},
 
-{q:"8. Rozdiel medzi operáciou a metódou?", options:["Operácia deklaruje čo objekt robí, metóda ako sa to urobí","Sú rovnaké","Metóda je atribút","Operácia je trieda"], correct:[0], multi:true},
+{q:"8. Rozdiel medzi operáciou a metódou?", options:["Operácia deklaruje čo objekt robí, metóda ako sa to urobí","Operácia je definícia správania","Metóda je implementácia operácie","Operácia je podpis funkcie"], correct:[0], multi:true},
 
-{q:"9. Package diagram patrí medzi diagramy:", options:["štrukturálne diagramy","behaviorálne","testovacie","UI diagramy"], correct:[0], multi:true},
+{q:"9. Package diagram patrí medzi diagramy:", options:["štrukturálne diagramy","organizačné diagramy","modulové diagramy","architektonické diagramy"], correct:[0], multi:true},
 
-{q:"10. Medzi diferencované druhy tried patria: rozhrania, implementačné triedy ... . Nahraďte ... jednou z odpovedí. Vyberte jednu:", options:["Typové triedy","Databázové triedy","UI triedy","Service triedy"], correct:[0], multi:true},
+{q:"10. Medzi diferencované druhy tried patria: rozhrania, implementačné triedy ... . Nahraďte ... jednou z odpovedí. Vyberte jednu:", options:["Typové triedy","Abstraktné triedy","Generické triedy","Konkrétne triedy"], correct:[0], multi:true},
 
-{q:"11. Asociačná trieda je:", options:["Trieda pripojená k asociácii","Trieda, ktorá môže byť spojená aj s inou triedou","UI komponent","Databáza"], correct:[0,1], multi:true},
+{q:"11. Asociačná trieda je:", options:["Trieda pripojená k asociácii","Trieda, ktorá môže niesť vlastnosti vzťahu","Rozšírenie vzťahu medzi triedami","Objekt reprezentujúci väzbu"], correct:[0,1], multi:true},
 
-{q:"12. Interface sa zobrazuje:", options:["Prázdnym kolieskom s menom rozhrania","Ako normálnu triedu so stereotypom interface","Červeným trojuholníkom","Šípkou"], correct:[0,1], multi:true},
+{q:"12. Interface sa zobrazuje:", options:["Prázdnym kolieskom s menom rozhrania","Ako trieda so stereotypom <<interface>>","Ako abstraktná trieda","Pomocou šípky realizácie"], correct:[0,1], multi:true},
 
-{q:"13. Zapúzdrenie znamená:", options:["Metódy sú ukryté za operáciami","Atribúty a operácie sú zapúzdrené v triede","Všetko je verejné","Bez tried"], correct:[0,1], multi:true},
+{q:"13. Zapúzdrenie znamená:", options:["Metódy sú ukryté za operáciami","Atribúty a operácie sú zapúzdrené v triede","Interná implementácia je skrytá","Prístup je riadený viditeľnosťou"], correct:[0,1], multi:true},
 
-{q:"14. Medzi štrukturálne črty triedy patria:", options:["Atribúty","Asociácie","Sekvencie","Správy"], correct:[0,1], multi:true},
+{q:"14. Medzi štrukturálne črty triedy patria:", options:["Atribúty","Asociácie","Operácie","Správy"], correct:[0,1], multi:true},
 
-{q:"15. Kvalifikátor slúži na:", options:["Redukuje násobnosť v asociácii","Zvyšuje kód","Maže triedy","Je diagram"], correct:[0], multi:true},
+{q:"15. Kvalifikátor slúži na:", options:["Redukuje násobnosť v asociácii","Spresňuje výber objektov v asociácii","Umožňuje indexovanie vzťahu","Zjednodušuje navigáciu"], correct:[0], multi:true},
 
-{q:"16. Vzťah trieda-objekt je ako vzťah správa-...", options:["Stimul","Event","Message","Signal"], correct:[0], multi:true},
+{q:"16. Vzťah trieda-objekt je ako vzťah správa-...", options:["Stimul","Event","Signál","Operácia"], correct:[0], multi:true},
 
-{q:"17. N-árna asociácia:", options:["Vyjadruje vzťah min. troch tried","Je zobrazená prázdnym diamantom","Je medzi 2 triedami","Je dedičnosť"], correct:[0,1], multi:true},
+{q:"17. N-árna asociácia:", options:["Vyjadruje vzťah min. troch tried","Je zobrazená pomocou diamantu","Spája viac ako dve entity","Je rozšírenie binárnej asociácie"], correct:[0,1], multi:true},
 
-{q:"18. Klasifikátory sú:", options:["Prvky, ktoré môžu mať inštancie","Nemajú inštancie","Len UI","Len DB"], correct:[0], multi:true},
+{q:"18. Klasifikátory sú:", options:["Prvky, ktoré môžu mať inštancie","Typové definície objektov","Štrukturálne prvky UML","Modelové entity"], correct:[0], multi:true},
 
-{q:"19. Acyclic dependencies principle znamená:", options:["Závislosť medzi balíčkami musí byť acyklický graf","S cyklami","Random","UI pravidlo"], correct:[0], multi:true},
+{q:"19. Acyclic dependencies principle znamená:", options:["Závislosť medzi balíčkami musí byť acyklický graf","Nesmú existovať cyklické závislosti","Moduly nesmú tvoriť slučky","Architektúra musí byť DAG"], correct:[0], multi:true},
 
-{q:"20. Subtyping je možné modelovať:", options:["Implementáciou rozhraní","Použitím dedičnosti","Len DB","Len UI"], correct:[0,1], multi:true},
+{q:"20. Subtyping je možné modelovať:", options:["Implementáciou rozhraní","Použitím dedičnosti","Použitím polymorfizmu","Použitím generalizácie"], correct:[0,1], multi:true},
 
-{q:"21. Väzobný objekt je:", options:["Inštancia asociačnej triedy","Trieda","Metóda","Diagram"], correct:[0], multi:true},
+{q:"21. Väzobný objekt je:", options:["Inštancia asociačnej triedy","Objekt reprezentujúci vzťah","Objekt medzi dvoma triedami","Realizácia väzby"], correct:[0], multi:true},
 
-{q:"22. Asociácia A a B:", options:["Plná čiara so šípkami na oboch koncoch","Plná čiara so šípkou pri B","Bez šípky","Cyklus"], correct:[0,1], multi:true},
+{q:"22. Asociácia A a B:", options:["Plná čiara so šípkami na oboch koncoch","Plná čiara so šípkou na jednej strane","Jednoduchá línia bez šípky","Bidirekčná väzba"], correct:[0,1], multi:true},
 
 {q:"23. Privátna viditeľnosť:", options:["-","+","#","~"], correct:[0], multi:true},
 
-{q:"24. Diagramy tried môžeme nakresliť z rôznych perspektív. Ak sa pri modelovaní zameriame na rozhranie systému, používame perspektívu: Vyberte jednu:", options:["špecifikácia","implementácia","test","UI"], correct:[0], multi:true},
+{q:"24. Diagramy tried môžeme nakresliť z rôznych perspektív. Ak sa pri modelovaní zameriame na rozhranie systému, používame perspektívu:", options:["špecifikácia","implementácia","konceptuálna","logická"], correct:[0], multi:true},
 
-{q:"25. Odvodená vlastnosť triedy:", options:["Je vypočítaná na základe iných vlastností","Statická","UI","DB"], correct:[0], multi:true},
+{q:"25. Odvodená vlastnosť triedy:", options:["Je vypočítaná na základe iných vlastností","Je dynamicky generovaná","Je závislá od iných atribútov","Je derivovaná z modelu"], correct:[0], multi:true},
 
-{q:"26. Dependency sa kreslí:", options:["čiarkovanou čiarou so šípkou","čiarkovanou čiarou so stereotypom use","plnou čiarou","blokom"], correct:[0,1], multi:true},
+{q:"26. Dependency sa kreslí:", options:["čiarkovanou čiarou so šípkou","čiarkovanou čiarou","závislosťou medzi triedami","navigačnou šípkou"], correct:[0,1], multi:true},
 
-{q:"27. Kompozícia vs agregácia:", options:["Kompozícia je silnejší vzťah ako agregácia","Agregácia je silnejšia","Rovnaké","Neexistuje"], correct:[0], multi:true},
+{q:"27. Kompozícia vs agregácia:", options:["Kompozícia je silnejší vzťah ako agregácia","Agregácia je slabšia forma vzťahu","Kompozícia reprezentuje vlastníctvo","Agregácia je voľný vzťah"], correct:[0], multi:true},
 
-{q:"28. Realization sa kreslí:", options:["čiarkovanou čiarou so stereotypom realize","čiarkovanou čiarou s trojuholníkom","plnou čiarou","kruhom"], correct:[0,1], multi:true},
+{q:"28. Realization sa kreslí:", options:["čiarkovanou čiarou so stereotypom realize","čiarkovanou čiarou s trojuholníkom","implementačnou šípkou","vzťahom implementácie"], correct:[0,1], multi:true},
 
-{q:"29. Interface má iba operácie:", options:["Pravda","Nepravda","Niekedy","Nikdy"], correct:[0], multi:true},
+{q:"29. Interface má iba operácie:", options:["Pravda","Nepravda","Čiastočne pravda","Závisí od jazyka"], correct:[0], multi:true},
 
-{q:"30. Diagram tried:", options:["Modelovanie slovníka pojmov systému","Statický pohľad na systém","Modelovanie spolupracujúcich tried","ani jedno"], correct:[0,1,2], multi:true},
+{q:"30. Diagram tried:", options:["Modelovanie slovníka pojmov systému","Statický pohľad na systém","Model spolupráce tried","Štrukturálny model systému"], correct:[0,1,2], multi:true},
 
-{q:"31. Triedy popisujúce rolu v modeli:", options:["Typové triedy","UI triedy","DB","Service"], correct:[0], multi:true},
+{q:"31. Triedy popisujúce rolu v modeli:", options:["Typové triedy","Rola v systéme","Abstraktné entity","Doménové triedy"], correct:[0], multi:true},
 
-{q:"32. Klasifikátor je:", options:["Prvok UML, ktorý môže mať inštancie","Spoločné pomenovanie štrukturálnych vecí","UI komponent","DB tabuľka"], correct:[0,1], multi:true},
+{q:"32. Klasifikátor je:", options:["Prvok UML, ktorý môže mať inštancie","Definuje typ objektov","Modelový prvok","Štrukturálny prvok"], correct:[0,1], multi:true},
 
 {q:"33. NEPATRÍ medzi princípy OOP:", options:["Realizácia","Dedičnosť","Zapúzdrenie","Polymorfizmus"], correct:[0], multi:true},
 
-{q:"34. Pohľad z dvoch hladísk:", options:["Dichotómia","Trichotómia","Diagram","Model"], correct:[0], multi:true},
+{q:"34. Pohľad z dvoch hladísk:", options:["Dichotómia","Rozdelenie","Dvojúrovňový model","Dualita"], correct:[0], multi:true},
 
 {q:"35. Súčasťou konceptuálneho modelu nie je:", options:["Jazyk OCL","Triedy","Vzťahy","Pravidlá"], correct:[0], multi:true},
 
-{q:"36. Asociačná trieda:", options:["Bližšie popisuje asociáciu","Môže byť vo vzťahu aj s inými triedami","Len UI","Len DB"], correct:[0,1], multi:true},
+{q:"36. Asociačná trieda:", options:["Bližšie popisuje asociáciu","Rozširuje vzťah o atribúty","Modeluje vzťah medzi triedami","Je viazaná na asociáciu"], correct:[0,1], multi:true},
 
-{q:"37. Základné stavebné bloky UML tvoria:", options:["Veci, vzťahy a diagramy","Kód","UI","DB"], correct:[0], multi:true},
+{q:"37. Základné stavebné bloky UML tvoria:", options:["Veci, vzťahy a diagramy","Modelové prvky","Štruktúra systému","Abstraktné komponenty"], correct:[0], multi:true},
 
-{q:"38. Klasifikátory patria medzi:", options:["Štrukturálne veci","Behaviorálne","UI","DB"], correct:[0], multi:true},
+{q:"38. Klasifikátory patria medzi:", options:["Štrukturálne veci","Modelové prvky","Typy objektov","Definície entít"], correct:[0], multi:true},
 
-{q:"39. Doplnky:", options:["Patria medzi všeobecné mechanizmy UML","Kód","UI","DB"], correct:[0], multi:true},
+{q:"39. Doplnky:", options:["Patria medzi všeobecné mechanizmy UML","Rozširujú UML","Slúžia na anotácie","Zlepšujú modelovanie"], correct:[0], multi:true},
 
-{q:"40. Ak trieda požaduje rozhranie:", options:["Závislosť","Realizácia","Kompozícia","Agregácia"], correct:[0], multi:true},
+{q:"40. Ak trieda požaduje rozhranie:", options:["Závislosť","Použitie rozhrania","Kompozícia","Agregácia"], correct:[0], multi:true},
 
-{q:"41. Ak trieda poskytuje rozhranie, modelujeme to pomocou vzťahu:", options:["Realizácia","Závislosť","Kompozícia","Agregácia"], correct:[0], multi:true},
+{q:"41. Ak trieda poskytuje rozhranie, modelujeme to pomocou vzťahu:", options:["Realizácia","Implementácia","Závislosť","Generalizácia"], correct:[0], multi:true},
 
-{q:"42. Väzba je:", options:["Inštanciou asociácie","Vzťah medzi objektami","Trieda","Diagram"], correct:[0,1], multi:true},
+{q:"42. Väzba je:", options:["Inštanciou asociácie","Vzťah medzi objektmi","Runtime spojenie","Konkrétna väzba medzi prvkami"], correct:[0,1], multi:true},
 
-{q:"43. Správne poradie perspektív:", options:["Pojmová, špecifikácia, implementácia","Implementácia, pojmová, špecifikácia","UI, DB, HW","Náhodné"], correct:[0], multi:true},
+{q:"43. Správne poradie perspektív:", options:["Pojmová, špecifikácia, implementácia","Logická, fyzická, konceptuálna","Implementačná, pojmová, špecifikácia","UI, DB, model"], correct:[0], multi:true},
 
-{q:"44. Rozdiel abstraktná trieda vs rozhranie:", options:["ABS trieda môže mať atribúty a rozhranie nemôže","Obe sú rovnaké","Rozhranie má atribúty","Žiadny rozdiel"], correct:[0], multi:true},
+{q:"44. Rozdiel abstraktná trieda vs rozhranie:", options:["ABS trieda môže mať atribúty a rozhranie nemôže","Abstraktná trieda môže mať implementáciu","Rozhranie definuje kontrakt","Rozhranie nemá stav"], correct:[0,1], multi:true},
 
-{q:"45. Konceptuálny model UML tvorí:", options:["Základné stavebné bloky","Pravidlá","Všeobecné mechanizmy","Kód"], correct:[0,1,2], multi:true}
+{q:"45. Konceptuálny model UML tvorí:", options:["Základné stavebné bloky","Pravidlá","Všeobecné mechanizmy","Model systému na vysokej úrovni"], correct:[0,1,2], multi:true}
 
 ];
 

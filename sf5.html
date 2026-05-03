@@ -3,7 +3,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
-<title>UML Quiz 5 - Interakcie</title>
+<title>SF Quiz 5 - Interakcie</title>
 <style>
 body { font-family: Arial, sans-serif; margin: 20px; }
 .question { padding: 12px; margin-bottom: 12px; border: 1px solid #ddd; border-radius: 8px; }
@@ -16,7 +16,7 @@ button { padding:10px 18px; font-size:16px; cursor:pointer; }
 </head>
 <body>
 
-<h2>UML Quiz 5 – Modelovanie interakcií</h2>
+<h2>SF Quiz 5 – Modelovanie interakcií</h2>
 
 <div id="quiz"></div>
 <button type="button" onclick="checkAnswers()">Vyhodnotiť</button>
@@ -28,59 +28,33 @@ button { padding:10px 18px; font-size:16px; cursor:pointer; }
 
 <script>
 const questions = [
-{q:"1. Vzťah medzi interakciou a prípadom použitia môže byť:", options:["Interakcia je realizáciou prípadu použitia","Use case je realizáciou interakcie","Interakcia je databáza","Interakcia je trieda"], correct:[0], multi:true},
-
-{q:"2. Pre znázornenie interakcií medzi dvoma prvkami interakcie použijeme diagram:", options:["Sekvenčný diagram","Triedny diagram","ER diagram","Deployment diagram"], correct:[0], multi:true},
-
-{q:"3. CRC karty slúžia na:", options:["Znázornenie zodpovednosti a spolupráce prvkov","UI návrh","DB modelovanie","Kompiláciu"], correct:[0], multi:true},
-
-{q:"4. Znak * pred hranatými zátvorkami v komunikácii označuje:", options:["Opakovanie – iteráciu","Atribút","Metódu","Triedu"], correct:[0], multi:true},
-
-{q:"5. Komunikačný diagram:", options:["Dáva dôraz na zobrazenie štrukturálnych vzťahov medzi prvkami","Zobrazuje postupnosť správ medzi prvkami","Len UI","Len DB"], correct:[0,1], multi:true},
-
-{q:"6. Poradie komunikácií v sekvenčnom diagrame:", options:["Je reprezentované vertikálnou osou","Môžeme určiť aj inak","DB poradie","UI poradie"], correct:[0,1], multi:true},
-
-{q:"7. Reflexná komunikácia:", options:["Označuje správu poslanú od prvku k nemu samému","Externý call","DB query","UI event"], correct:[0], multi:true},
-
-{q:"8. Čiara života:", options:["Sa používa v sekvenčnom diagrame","Smeruje vertikálne od prvku dole","DB tabuľka","Trieda"], correct:[0,1], multi:true},
-
-{q:"9. Komunikácia (správa) v komunikačnom diagrame:", options:["Môže obsahovať tzv. dot notáciu","Môže obsahovať číslo označujúce jej poradie","Môže obsahovať iteráciu","Všetko"], correct:[0,1,2], multi:true},
-
-{q:"10. Rola v interakcii:", options:["Definuje použitie inštancie triedy v interakcii","DB schéma","UI komponent","Atribút"], correct:[0], multi:true},
-
-{q:"11. Komunikácia medzi prvkami v sekvenčnom diagrame:", options:["Je zobrazená ako plná čiara so šípkou","Môže obsahovať podmienku","DB join","UI flow"], correct:[0,1], multi:true},
-
-{q:"12. Označte správne tvrdenia:", options:["Interakcia je množina správ medzi prvkami","Spolupráca (collaboration) je kolekcia tried, ich správ a ich asociácií","UI layout","DB model"], correct:[0,1], multi:true},
-
-{q:"13. Iterácia sa v komunikácii (správe) označuje:", options:["Hviezdičkou a hranatými zátvorkami *[iterácia]","#loop","@repeat","!cycle"], correct:[0], multi:true},
-
-{q:"14. Poradie komunikácií v komunikačnom diagrame:", options:["Môžeme zistiť inak","Len časovo","Len náhodne","Nie je možné"], correct:[0], multi:true},
-
-{q:"15. Dot notácia:", options:["Slúži na zobrazenie rôznych úrovní komunikácie","UI štýl","DB index","Trieda"], correct:[0], multi:true},
-
-{q:"16. Sekvenčný diagram znázorňuje podobné informácie ako:", options:["Komunikačný diagram","Úplne odlišné","Len DB","Len UI"], correct:[0], multi:true},
-
-{q:"17. Sekvenčný diagram slúži na zobrazenie:", options:["Ako na seba vzájomne pôsobia prvky v čase","DB štruktúru","UI layout","Kód"], correct:[0], multi:true},
-
-{q:"18. Aktivácia:", options:["Reprezentuje časovú periódu, počas ktorej prvok vykonáva operáciu","Sa používa v sekvenčnom diagrame","DB transakcia","Trieda"], correct:[0,1], multi:true},
-
-{q:"19. Pri modelovaní interakcií sa posielajú správy:", options:["Aj synchrónne aj asynchrónne","Len sync","Len async","Žiadne"], correct:[0], multi:true},
-
-{q:"20. Operátory riadenia (control operators) slúžia na modelovanie:", options:["Cyklu","Možnosti výberu postupnosti správ","DB join","UI render"], correct:[0,1], multi:true},
-
-{q:"21. Rola triedy (class role) v interakcii:", options:["Definuje konkrétne použitie objektu triedy v interakcii","DB tabuľka","UI komponent","Atribút"], correct:[0], multi:true},
-
-{q:"22. V hranatých zátvorkách môže byť v sekvenčnom diagrame:", options:["Počet opakovaní – iterácia","Podmienka interakcie","UI","DB"], correct:[0,1], multi:true},
-
-{q:"23. Pre znázornenie vzťahov a interakcií medzi prvkami interakcie použijeme diagram:", options:["Komunikačný diagram","Class diagram","Use case","State diagram"], correct:[0], multi:true},
-
-{q:"24. Modelovanie interakcií je:", options:["Špeciálny prípad modelovania správania","Štrukturálne","DB model","UI model"], correct:[0], multi:true},
-
-{q:"25. CRC karty slúžia na:", options:["Hľadanie zodpovednosti danej triedy","Spoluprácu","UI","DB"], correct:[0,1], multi:true},
-
-{q:"26. Princíp CRC pri vytváraní balíčkov znamená, že do jedného balíčka dávame triedy ktoré:", options:["Sú spolu znovupoužiteľné","Náhodné","UI skupiny","DB tabuľky"], correct:[0], multi:true},
-
-{q:"27. Nahraditeľnosť sa:", options:["Môže realizovať pomocou dedičnosti","Kompozícia","UI","DB"], correct:[0], multi:true}
+{q:"1. Vzťah medzi interakciou a prípadom použitia môže byť:", options:["Interakcia je realizáciou prípadu použitia","Use case je realizáciou interakcie","Interakcia je databáza","Interakcia je implementačný kód systému"], correct:[0], multi:true},
+{q:"2. Pre znázornenie interakcií medzi dvoma prvkami interakcie použijeme diagram:", options:["Sekvenčný diagram","Triedny diagram","ER diagram","Diagram komponentov"], correct:[0], multi:true},
+{q:"3. CRC karty slúžia na:", options:["Znázornenie zodpovednosti a spolupráce prvkov","Popis rolí tried v systéme","Databázové modelovanie","Definovanie algoritmov"], correct:[0], multi:true},
+{q:"4. Znak * pred hranatými zátvorkami v komunikácii označuje:", options:["Opakovanie – iteráciu","Deklaráciu premennej","Volanie metódy","Identifikátor triedy"], correct:[0], multi:true},
+{q:"5. Komunikačný diagram:", options:["Dáva dôraz na zobrazenie štrukturálnych vzťahov medzi prvkami","Zobrazuje sieť komunikujúcich objektov","Popisuje databázové relácie","Zachytáva používateľské rozhranie"], correct:[0,1], multi:true},
+{q:"6. Poradie komunikácií v sekvenčnom diagrame:", options:["Je reprezentované vertikálnou osou","Môžeme určiť aj iným spôsobom (napr. číslovaním správ)","Je určené len graficky bez pravidiel","Nie je explicitne definované"], correct:[0,1], multi:true},
+{q:"7. Reflexná komunikácia:", options:["Označuje správu poslanú od prvku k nemu samému","Interné volanie metódy objektu","Externé volanie systému","Signál medzi dvoma triedami"], correct:[0], multi:true},
+{q:"8. Čiara života:", options:["Sa používa v sekvenčnom diagrame","Smeruje vertikálne od prvku dole","Reprezentuje objekt v čase","Zobrazuje životný cyklus triedy"], correct:[0,1], multi:true},
+{q:"9. Komunikácia (správa) v komunikačnom diagrame:", options:["Môže obsahovať tzv. dot notáciu","Môže obsahovať číslo označujúce jej poradie","Môže obsahovať iteráciu","Môže obsahovať podmienky vykonania"], correct:[0,1,2], multi:true},
+{q:"10. Rola v interakcii:", options:["Definuje použitie inštancie triedy v interakcii","Určuje funkciu objektu v konkrétnom scenári","Popisuje databázový záznam","Definuje UI prvok"], correct:[0], multi:true},
+{q:"11. Komunikácia medzi prvkami v sekvenčnom diagrame:", options:["Je zobrazená ako plná čiara so šípkou","Môže obsahovať podmienku","Je jednosmerná alebo obojsmerná","Zachytáva výmenu správ"], correct:[0,1], multi:true},
+{q:"12. Označte správne tvrdenia:", options:["Interakcia je množina správ medzi prvkami","Spolupráca (collaboration) je kolekcia tried, ich správ a ich asociácií","Interakcia popisuje dynamické správanie systému","Spolupráca definuje statickú štruktúru objektov"], correct:[0,1], multi:true},
+{q:"13. Iterácia sa v komunikácii (správe) označuje:", options:["Hviezdičkou a hranatými zátvorkami *[iterácia]","#loop","@repeat","cyklus bez označenia"], correct:[0], multi:true},
+{q:"14. Poradie komunikácií v komunikačnom diagrame:", options:["Môžeme zistiť inak","Určuje sa pomocou číslovania správ","Je implicitne dané smermi šípok","Nie je dôležité"], correct:[0], multi:true},
+{q:"15. Dot notácia:", options:["Slúži na zobrazenie rôznych úrovní komunikácie","Umožňuje hierarchické pomenovanie správ","Je spôsob zápisu objektov","Je forma UML zápisu tried"], correct:[0], multi:true},
+{q:"16. Sekvenčný diagram znázorňuje podobné informácie ako:", options:["Komunikačný diagram","Diagram spolupráce","Diagram aktivít","Stavový diagram"], correct:[0], multi:true},
+{q:"17. Sekvenčný diagram slúži na zobrazenie:", options:["Ako na seba vzájomne pôsobia prvky v čase","Dynamiky systému počas vykonávania","Dátových štruktúr","Statických vzťahov tried"], correct:[0], multi:true},
+{q:"18. Aktivácia:", options:["Reprezentuje časovú periódu, počas ktorej prvok vykonáva operáciu","Je obdĺžnik na lifeline","Zachytáva vykonávanie metódy","Reprezentuje beh procesu"], correct:[0,1], multi:true},
+{q:"19. Pri modelovaní interakcií sa posielajú správy:", options:["Aj synchrónne aj asynchrónne","Synchrónne volania","Asynchrónne signály","Blokujúce volania"], correct:[0], multi:true},
+{q:"20. Operátory riadenia (control operators) slúžia na modelovanie:", options:["Cyklu","Možnosti výberu postupnosti správ","Vetvenia logiky","Podmienok vykonania interakcie"], correct:[0,1], multi:true},
+{q:"21. Rola triedy (class role) v interakcii:", options:["Definuje konkrétne použitie objektu triedy v interakcii","Určuje kontext objektu v scenári","Je databázová entita","Je typ UI komponentu"], correct:[0], multi:true},
+{q:"22. V hranatých zátvorkách môže byť v sekvenčnom diagrame:", options:["Počet opakovaní – iterácia","Podmienka interakcie","Guard podmienka","Logický výraz"], correct:[0,1], multi:true},
+{q:"23. Pre znázornenie vzťahov a interakcií medzi prvkami interakcie použijeme diagram:", options:["Komunikačný diagram","Sekvenčný diagram","Diagram aktivít","Diagram tried"], correct:[0], multi:true},
+{q:"24. Modelovanie interakcií je:", options:["Špeciálny prípad modelovania správania","Súčasť behaviorálneho modelovania","Statické modelovanie","Databázové modelovanie"], correct:[0], multi:true},
+{q:"25. CRC karty slúžia na:", options:["Hľadanie zodpovednosti danej triedy","Analýzu spolupráce objektov","Návrh databázy","Definovanie UI"], correct:[0,1], multi:true},
+{q:"26. Princíp CRC pri vytváraní balíčkov znamená, že do jedného balíčka dávame triedy ktoré:", options:["Sú spolu znovupoužiteľné","Sú silno súvisiace z hľadiska zodpovednosti","Sú náhodne zoskupené","Patria do rovnakého UI modulu"], correct:[0], multi:true},
+{q:"27. Nahraditeľnosť sa:", options:["Môže realizovať pomocou dedičnosti","Zabezpečuje polymorfizmom","Realizuje kompozíciou","Nie je súčasť UML"], correct:[0], multi:true}
 ];
 
 function shuffle(a){return a.sort(()=>Math.random()-0.5);}
