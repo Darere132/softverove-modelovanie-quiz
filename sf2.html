@@ -140,87 +140,45 @@ const questions = [
 
 ];
 
-function shuffle(arr){
-    return [...arr].sort(()=>Math.random()-0.5);
-}
+function shuffle(a){return a.sort(()=>Math.random()-0.5);}
 
 function render(){
-    const container=document.getElementById("quiz");
-    container.innerHTML="";
-
-    shuffle(questions).forEach((q,i)=>{
-
-        let div=document.createElement("div");
-        div.className="question";
-
-        let shuffledOptions=q.options.map((text,index)=>({
-            text:text,
-            original:index
-        }));
-
-        shuffledOptions=shuffle(shuffledOptions);
-
-        let newCorrect=[];
-
-        shuffledOptions.forEach((opt,newIndex)=>{
-            if(q.correct.includes(opt.original)){
-                newCorrect.push(newIndex);
-            }
-        });
-
-        div.dataset.correct=JSON.stringify(newCorrect.sort((a,b)=>a-b));
-
-        let html=`<p><b>${i+1}. ${q.q}</b></p>`;
-
-        shuffledOptions.forEach((opt,idx)=>{
-            html+=`
-            <label>
-                <input type="${q.multi?'checkbox':'radio'}"
-                       name="q${i}"
-                       value="${idx}">
-                ${opt.text}
-            </label>`;
-        });
-
-        div.innerHTML=html;
-        container.appendChild(div);
-    });
+const c=document.getElementById("quiz");
+c.innerHTML="";
+shuffle(questions).forEach((q,i)=>{
+let div=document.createElement("div");
+div.className="question";
+let opts=shuffle(q.options.map((o,idx)=>({o,idx}))).map((opt)=>{
+return `<label><input type='${q.multi?"checkbox":"radio"}' name='q${i}' value='${opt.idx}'> ${opt.o}</label>`;
+}).join("");
+div.innerHTML=`<p>${q.q}</p>`+opts;
+div.dataset.correct=JSON.stringify(q.correct);
+c.appendChild(div);
+});
 }
 
 function checkAnswers(){
+let score=0;
+document.querySelectorAll(".question").forEach(div=>{
+let correct=JSON.parse(div.dataset.correct);
+let inputs=div.querySelectorAll("input");
+let selected=[];
+inputs.forEach(i=>{if(i.checked) selected.push(parseInt(i.value));});
 
-    let score=0;
-    let blocks=document.querySelectorAll(".question");
+let ok=JSON.stringify(selected.sort())===JSON.stringify(correct.sort());
 
-    blocks.forEach(div=>{
+div.classList.remove("correct","wrong");
 
-        let correct=JSON.parse(div.dataset.correct);
-        let selected=[...div.querySelectorAll("input:checked")]
-            .map(x=>parseInt(x.value))
-            .sort((a,b)=>a-b);
+if(ok){score++; div.classList.add("correct");}
+else{
+div.classList.add("wrong");
+inputs.forEach(i=>{
+if(correct.includes(parseInt(i.value))){i.parentElement.style.background="#d4edda";}
+});
+}
+});
 
-        let ok=JSON.stringify(correct)===JSON.stringify(selected);
-
-        div.classList.remove("correct","wrong");
-
-        div.querySelectorAll("label").forEach(l=>l.style.background="");
-
-        if(ok){
-            div.classList.add("correct");
-            score++;
-        }else{
-            div.classList.add("wrong");
-
-            div.querySelectorAll("input").forEach(inp=>{
-                if(correct.includes(parseInt(inp.value))){
-                    inp.parentElement.style.background="#b8f5b8";
-                }
-            });
-        }
-    });
-
-    document.getElementById("result").innerText =
-        "Výsledok: "+score+" / "+blocks.length;
+document.getElementById("result").innerText=`Výsledok: ${score} / 28`;
 }
 
 render();
